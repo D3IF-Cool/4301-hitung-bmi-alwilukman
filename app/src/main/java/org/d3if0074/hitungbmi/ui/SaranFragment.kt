@@ -25,17 +25,17 @@ class SaranFragment : Fragment() {
         when (kategori) {
             KategoriBmi.KURUS -> {
                 actionBar?.title = getString(R.string.judul_kurus)
-                binding.imageView.setImageResource(R.drawable.ic_launcher_foreground)
+                binding.imageView.setImageResource(R.drawable.kurus)
                 binding.textView.text = getString(R.string.saran_kurus)
             }
             KategoriBmi.IDEAL -> {
                 actionBar?.title = getString(R.string.judul_ideal)
-                binding.imageView.setImageResource(R.drawable.ic_launcher_foreground)
+                binding.imageView.setImageResource(R.drawable.ideal)
                 binding.textView.text = getString(R.string.saran_ideal)
             }
             KategoriBmi.GEMUK -> {
                 actionBar?.title = getString(R.string.judul_gemuk)
-                binding.imageView.setImageResource(R.drawable.ic_launcher_foreground)
+                binding.imageView.setImageResource(R.drawable.gemuk)
                 binding.textView.text = getString(R.string.saran_gemuk)
             }
         }
