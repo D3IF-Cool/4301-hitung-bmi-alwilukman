@@ -1,6 +1,5 @@
-package org.d3if0074.hitungbmi.ui
+package org.d3if0074.hitungbmi.ui.hitung
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import org.d3if0074.hitungbmi.R
 import org.d3if0074.hitungbmi.data.KategoriBmi
@@ -34,7 +32,7 @@ class HitungFragment : Fragment() {
 
     private val viewModel: HitungVIewModel by viewModels()
     private lateinit var binding: FragmentHitungBinding
-    private lateinit var kategoriBmi: KategoriBmi
+
 
 
     override fun onCreateView(
@@ -45,11 +43,8 @@ class HitungFragment : Fragment() {
             layoutInflater, container, false
         )
         binding.button.setOnClickListener { hitungBmi() }
-        binding.saranButton.setOnClickListener { view: View ->
-            view.findNavController().navigate(
-                HitungFragmentDirections.actionHitungFragmentToSaranFragment3(kategoriBmi)
-            )
-        }
+        binding.saranButton.setOnClickListener { viewModel.mulaiNavigasi() }
+
         binding.shareButton.setOnClickListener { shareData() }
         setHasOptionsMenu(true)
         return binding.root
@@ -57,6 +52,13 @@ class HitungFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getNavigasi().observe(viewLifecycleOwner, {
+            if (it == null) return@observe
+            findNavController().navigate()
+            viewModel.selesaiNavigasi()
+        })
+
 
         viewModel.getHasilBmi().observe(viewLifecycleOwner, {
             if (it == null) return@observe
@@ -120,5 +122,9 @@ class HitungFragment : Fragment() {
             }
         return getString(stringRes)
     }
+}
+
+private fun Any.navigate() {
+
 }
 
